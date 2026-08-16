@@ -1,0 +1,61 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build: /home/oryadi/inception/srcs/requirements/mariadb/.
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql/
+    networks:
+      - inception_net
+    image: mariadb
+
+  wordpress:
+    container_name: wordpress
+    build: /home/oryadi/inception/srcs/requirements/wordpress/.
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html/
+    depends_on:
+      - mariadb
+    networks:
+      - inception_net
+    image: wordpress
+
+  nginx:
+    container_name: nginx
+    build: /home/oryadi/inception/srcs/requirements/nginx/.
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/html/
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    networks:
+      - inception_net
+    image: nginx
+
+networks:
+  inception_net:
+    name: inception_net
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      o: bind
+      device: /home/oryadi/data/wordpress/
+      type: none
+
+  mariadb:
+    driver: local
+    driver_opts:
+      o: bind
+      device: /home/oryadi/data/mariadb/
+      type: none
