@@ -1,7 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
-    build: /home/oryadi/inception/srcs/requirements/mariadb/.
+    build: /home/${USER_NAME}/inception/srcs/requirements/mariadb/.
     restart: always
     env_file:
       - .env
@@ -13,7 +13,7 @@ services:
 
   wordpress:
     container_name: wordpress
-    build: /home/oryadi/inception/srcs/requirements/wordpress/.
+    build: /home/${USER_NAME}/inception/srcs/requirements/wordpress/.
     restart: always
     env_file:
       - .env
@@ -27,7 +27,7 @@ services:
 
   nginx:
     container_name: nginx
-    build: /home/oryadi/inception/srcs/requirements/nginx/.
+    build: /home/${USER_NAME}/inception/srcs/requirements/nginx/.
     restart: always
     env_file:
       - .env
@@ -50,12 +50,12 @@ volumes:
     driver: local
     driver_opts:
       o: bind
-      device: /home/oryadi/data/wordpress/
+      device: /home/${USER_NAME}/data/wordpress/
       type: none
 
   mariadb:
     driver: local
     driver_opts:
       o: bind
-      device: /home/oryadi/data/mariadb/
+      device: /home/${USER_NAME}/data/mariadb/
       type: none
