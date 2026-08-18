@@ -1,6 +1,11 @@
 #!/bin/bash
 
+echo "nawi nstart MariaDB"
+
 service mariadb start
+sleep 2
+
+echo "start for MariaDB"
 
 mysql -e "CREATE DATABASE IF NOT EXISTS $DB_NAME"
 
@@ -10,4 +15,4 @@ mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%'"
 
 service mariadb stop
 
-exec mariadbd
+exec mysqld_safe --bind-address=$DB_HOST --port=3306
