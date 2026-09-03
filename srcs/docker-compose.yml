@@ -47,19 +47,15 @@ networks:
 
 volumes:
   wordpress:
+    driver: local
+    driver_opts:
+      o: bind
+      device: /home/${USER_NAME}/data/wordpress/
+      type: none
+
   mariadb:
-
-# volumes:
-#   wordpress:
-#     driver: local
-#     driver_opts:
-#       o: bind
-#       device: /home/${USER_NAME}/data/wordpress/
-#       type: none
-
-#   mariadb:
-#     driver: local
-#     driver_opts:
-#       o: bind
-#       device: /home/${USER_NAME}/data/db2/
-#       type: none
+    driver: local
+    driver_opts:
+      o: bind
+      device: /home/${USER_NAME}/data/db/
+      type: none

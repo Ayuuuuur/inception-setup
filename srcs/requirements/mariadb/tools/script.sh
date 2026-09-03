@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "nawi nstart MariaDB"
+echo "starting MariaDB"
 
 service mariadb start
 sleep 2
