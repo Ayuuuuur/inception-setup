@@ -1,0 +1,6 @@
+# Secrets
+secrets/
+srcs/.env
+
+# Local data
+data/

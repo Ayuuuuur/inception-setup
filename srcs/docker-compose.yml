@@ -6,6 +6,8 @@ services:
     restart: always
     env_file:
       - .env
+    secrets:
+      - db_password
     volumes:
       - mariadb:/var/lib/mysql/
     networks:
@@ -17,6 +19,9 @@ services:
     restart: always
     env_file:
       - .env
+    secrets:
+      - credentials
+      - db_password
     volumes:
       - wordpress:/var/www/html/
     depends_on:
@@ -34,7 +39,7 @@ services:
     volumes:
       - wordpress:/var/www/html/
     ports:
-      - 443:443
+      - "443:443"
     depends_on:
       - wordpress
     networks:
@@ -59,3 +64,13 @@ volumes:
       o: bind
       device: /home/${USER_NAME}/data/db/
       type: none
+
+secrets:
+  credentials:
+    file: ../secrets/credentials.txt
+
+  db_password:
+    file: ../secrets/db_password.txt
+
+  # db_root_password:
+  #   file: ../secrets/db_root_password.txt

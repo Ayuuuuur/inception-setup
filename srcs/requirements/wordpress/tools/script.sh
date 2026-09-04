@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DB_USER_PASS="$(cat /run/secrets/db_password)"
+. /run/secrets/credentials
+
 sleep 10
 
 cd /var/www/html/wordpress
