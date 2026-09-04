@@ -30,11 +30,11 @@ wp user create \
 chown -R www-data:www-data /var/www/html/wordpress
 
 sed -i \
-    's#listen = /run/php/php7.4-fpm.sock#listen = 0.0.0.0:9000#g' \
-    /etc/php/7.4/fpm/pool.d/www.conf
+    's#listen = /run/php/php8.2-fpm.sock#listen = 0.0.0.0:9000#g' \
+    /etc/php/8.2/fpm/pool.d/www.conf
 
 sed -i \
     's#chdir = /var/www#chdir = /var/www/html/wordpress#g' \
-    /etc/php/7.4/fpm/pool.d/www.conf
+    /etc/php/8.2/fpm/pool.d/www.conf
 
-php-fpm7.4 -F
+php-fpm8.2 -F
