@@ -29,13 +29,15 @@ wp user create \
     "${WP_USER_EMAIL}" \
     --user_pass="${WP_USER_PASSWORD}" \
     --allow-root
-
+#change ownership of all files so that php-fpm can run as www-data
 chown -R www-data:www-data /var/www/html/wordpress
 
-sed -i \
-    's#listen = /run/php/php8.2-fpm.sock#listen = 0.0.0.0:9000#g' \
+#php-fpm listen on 9000
+sed -i \ 
+    's#listen = /run/php/php8.2-fpm.sock#listen = 0.0.0.0:9000#g' \ 
     /etc/php/8.2/fpm/pool.d/www.conf
 
+# changing the woring dir to my wordpress dir 
 sed -i \
     's#chdir = /var/www#chdir = /var/www/html/wordpress#g' \
     /etc/php/8.2/fpm/pool.d/www.conf

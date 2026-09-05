@@ -5,6 +5,7 @@ echo "starting MariaDB"
 DB_USER_PASS="$(cat /run/secrets/db_password)"
 
 service mariadb start
+
 sleep 2
 
 echo "start for MariaDB"
