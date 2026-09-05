@@ -6,11 +6,21 @@ up: setup
 setup:
 	mkdir -p $(HOME)/data/db $(HOME)/data/wordpress
 
-build:
-	docker compose -f $(YML) build
-
 down:
 	docker compose -f $(YML) down
+
+clean: down
+	docker rmi -f nginx
+	docker rmi -f wordpress
+	docker rmi -f mariadb
+	docker volume rm srcs_mariadb || true
+	docker volume rm srcs_wordpress || true
+	sudo rm -rf $(HOME)/data/*
+
+re: clean up
+
+build:
+	docker compose -f $(YML) build
 
 start:
 	docker compose -f $(YML) start
@@ -18,14 +28,8 @@ start:
 stop:
 	docker compose -f $(YML) stop
 
-restart:
-	docker compose -f $(YML) restart
-
 logs:
 	docker compose -f $(YML) logs
 
 ps:
 	docker compose -f $(YML) ps
-
-remove-all:
-	docker rmi $$(docker images -aq) ; docker volume prune -f $$(docker volume ls -q) ; docker system prune -f 

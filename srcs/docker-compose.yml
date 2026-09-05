@@ -60,7 +60,7 @@ volumes:
 
   mariadb:
     driver: local
-    driver_opts: #conncet one location to other
+    driver_opts:
       o: bind
       device: /home/${USER_NAME}/data/db/
       type: none

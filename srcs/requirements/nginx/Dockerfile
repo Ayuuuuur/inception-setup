@@ -10,4 +10,6 @@ COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 RUN chmod +x script.sh
 
+EXPOSE 443
+
 CMD ["bash", "script.sh"]
